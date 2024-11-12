@@ -12,11 +12,11 @@
         # Nextflow 24.04.2 (fat binary)
         nextflow = pkgs.stdenv.mkDerivation {
           name = "nextflow";
-          version = "24.04.2";
+          version = "23.04.2";
 
           src = pkgs.fetchurl {
             url = "https://github.com/nextflow-io/nextflow/releases/download/v${nextflow.version}/nextflow-${nextflow.version}-all";
-            hash = "sha256-FJGk78BvDfnu0fpqpajGV0NTl/qZw0v5VCgUYOmxxe4=";
+            hash = "sha256-16bD6sxABkjahcClaGbOOdJAs6q0yI7kcBgPTc8YR7Q=";
           };
 
           nativeBuildInputs = [ pkgs.makeWrapper ];
@@ -29,7 +29,7 @@
             chmod +x $out/nextflow
 
             makeWrapper $out/nextflow $out/bin/nextflow \
-              --set JAVA_HOME ${pkgs.jdk}
+              --set JAVA_HOME ${pkgs.jdk11}
           '';
         };
 
@@ -55,12 +55,12 @@
             cp nf-test/* $out
 
             makeWrapper $out/nf-test $out/bin/nf-test \
-              --set JAVA_HOME ${pkgs.jdk}
+              --set JAVA_HOME ${pkgs.jdk11}
           '';
         };
 
         # nixpkgs' Groovy doesn't work with newer JDKs
-        groovy = pkgs.groovy.override { jdk = pkgs.jdk8; };
+        groovy = pkgs.groovy.override { jdk = pkgs.jdk11; };
       in
       {
         devShells.default = (pkgs.buildFHSUserEnv {

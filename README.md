@@ -2,7 +2,7 @@
 
 Nix Flake that provides:
 
-* Nextflow 24.04.2
+* Nextflow 23.04.2
 * NF-Test 0.9.2
 * Groovy 3.0.11
 
